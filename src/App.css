@@ -1,0 +1,222 @@
+.App {
+	text-align: center;
+}
+
+.App {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	/* justify-content: center; */
+	/* font-size: calc(10px + 2vmin); */
+	/* color: white; */
+}
+
+ul {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--spacing);
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.25rem;
+}
+h4 {
+  font-size: 0.875rem;
+}
+p {
+  margin-bottom: 1.25rem;
+  color: var(--clr-grey-5);
+}
+
+@media screen and (min-width: 800px) {
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
+  body {
+    font-size: 1rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+}
+
+.login_form {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	padding: 20px;
+	border-radius: var(--radius);
+	box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.form {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* max-width: 730px; */
+	background: whitesmoke;
+	margin: 0 auto;
+	border-radius: 0.5rem;
+	text-align: center;
+	padding: 1.5rem;
+  color: grey;
+}
+
+section {
+	/* width: 100%; */
+	padding: 12px, 20px;
+	margin-top: 1.5rem;
+	box-sizing: border-box;
+	margin-bottom: 2rem;
+}
+
+.login {
+	width: 280px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* max-width: 730px; */
+	background: whitesmoke;
+	margin: 0 auto;
+	margin-top: 100px;
+	border-radius: 0.5rem;
+	text-align: center;
+	padding: 1.5rem;
+}
+
+input[type='text'],
+[type='password'],
+[type='email'],
+input[type='date'] {
+	width: 250px;
+	height: 50px;
+	border: none;
+	color: gray;
+	border-color: gray;
+	outline: none;
+	padding: 5px;
+	border-radius: 3px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+textarea {
+	width: 250px;
+	height: 80px;
+	color: gray;
+	border-color: gray;
+	border: none;
+	outline: none;
+	padding: 5px;
+	border-radius: 3px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+select {
+	width: 250px;
+	height: 50px;
+	border: none;
+	outline: none;
+	padding: 5px;
+	color: gray;
+	border-color: gray;
+	border-radius: 3px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+	margin-top: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	background: rgb(231, 216, 231);
+	/* color: var(--clr-primary-5); */
+	text-transform: capitalize;
+	border-radius: 8px;
+	border-color: transparent;
+	cursor: pointer;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+	padding: 10px;
+	margin: 10px 0px;
+}
+
+.Home {
+	color: lightblue;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.Home h2 {
+	max-width: 400px;
+  font-family:url('./Cormorant/static/Cormorant-BoldItalic.ttf')
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  max-width: 400px;
+}
+
+.logo{
+  height: 150px;
+}
+
+.sos{
+  border: none;
+  padding: 40px;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  cursor:pointer;
+}
+
+.sos img{
+  width: 100px;
+  height: 100px;
+}
+
+.details{
+	padding: 20px;
+	margin-top: 30px;
+}

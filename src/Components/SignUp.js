@@ -1,35 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser'
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useGlobal } from '../Contex';
 
 const SignUp = () => {
-	const {values, setValues} = useGlobal()
-	const [students, setStudents] = useState([])
+	const form = useRef();
+
+	const sendEmail = (e) => {
+		e.preventDefault();
+
+		emailjs
+			.sendForm(
+				'service_ldu69s5',
+				'template_6zbm9j5',
+				form.current,
+				'CIUw0NAi1htBswg9y'
+			)
+			.then(
+				(result) => {
+					console.log(result.text);
+				},
+				(error) => {
+					console.log(error.text);
+				}
+			);
+	};
+	const { values, setValues } = useGlobal();
+	const [students, setStudents] = useState([]);
 	const handleAccept = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		const name = e.target.id;
 		const value = e.target.value;
 		setValues({ ...values, [name]: value });
 	};
 
 	const handleSubmit = (e) => {
-		e.preventDefault()
-		if(students.includes(values)){
+		e.preventDefault();
+		if (students.includes(values)) {
 			console.log('same details entered');
-		}else{
-			setStudents([...students, values])
+		} else {
+			setStudents([...students, values]);
+			sendEmail();
 		}
-	}
-
-	useEffect(()=>{
-		console.log(students)
-
-	},[students])
+	};
 
 	return (
 		<div className='form'>
 			<form
+				ref={form}
 				className='form-control'
 				onSubmit={handleSubmit}>
 				<h3>Report Emergency</h3>
@@ -37,8 +56,9 @@ const SignUp = () => {
 					<label htmlFor='firstName'>First Name:</label>
 					<input
 						id='firstName'
+						name='firstName'
 						type='text'
-						placeholder='Firstname'
+						placeholder='First Name'
 						required
 						onChange={handleAccept}
 					/>
@@ -47,8 +67,9 @@ const SignUp = () => {
 					<label htmlFor='lastName'>Last Name:</label>
 					<input
 						id='lastName'
+						name='lastName'
 						type='text'
-						placeholder='lastname'
+						placeholder='Last Name'
 						required
 						onChange={handleAccept}
 					/>
@@ -58,7 +79,8 @@ const SignUp = () => {
 					<select
 						name='gender'
 						id='gender'
-						onChange={handleAccept}>
+						onChange={handleAccept}
+						required>
 						<option value=''>Gender</option>
 						<option value='male'>Male</option>
 						<option value='female'>Female</option>
@@ -69,6 +91,7 @@ const SignUp = () => {
 					<label htmlFor='matNo'>Matriculation Number</label>
 					<input
 						id='matNo'
+						name='matNo'
 						type='text'
 						required
 						onChange={handleAccept}
@@ -79,7 +102,8 @@ const SignUp = () => {
 					<select
 						name='condition'
 						id='condition'
-						onChange={handleAccept}>
+						onChange={handleAccept}
+						required>
 						<option value='sickle-cell'>Sickle Cell</option>
 						<option value='asthma'>Asthma</option>
 						<option value='seizure'>Seizures</option>

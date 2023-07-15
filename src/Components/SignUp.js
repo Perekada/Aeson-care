@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser'
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useGlobal } from '../Contex';
 
 const SignUp = () => {
@@ -27,6 +27,7 @@ const SignUp = () => {
 	};
 	const { values, setValues } = useGlobal();
 	const [students, setStudents] = useState([]);
+	const navigate = useNavigate()
 	const handleAccept = (e) => {
 		e.preventDefault();
 		const name = e.target.id;
@@ -36,13 +37,15 @@ const SignUp = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (students.includes(values)) {
-			console.log('same details entered');
-		} else {
 			setStudents([...students, values]);
 			sendEmail();
-		}
 	};
+	
+	const Nav = () =>{
+		setTimeout(()=>{
+		navigate('/stdfile')
+		},5000)
+	}
 
 	return (
 		<div className='form'>
@@ -122,9 +125,7 @@ const SignUp = () => {
 						onChange={handleAccept}></textarea>
 				</section>
 				<div>
-						<button className='btn' type='submit'>Submit</button>
-					<NavLink to='/stdfile'>
-					</NavLink>
+						<button className='btn' type='submit' onClick={Nav}>Submit</button>
 				</div>
 			</form>
 		</div>

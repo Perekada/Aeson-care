@@ -12,7 +12,7 @@ const StdFile = () => {
 		setTimeout(()=>{
 			navigate('/')
 		}, 20000)
-	},[])
+	})
 
 	return (
 		<div className='form'>

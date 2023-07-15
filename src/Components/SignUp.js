@@ -7,8 +7,7 @@ import { useGlobal } from '../Contex';
 const SignUp = () => {
 	const form = useRef();
 
-	const sendEmail = (e) => {
-		e.preventDefault();
+	const sendEmail = () => {
 
 		emailjs
 			.sendForm(
@@ -88,7 +87,7 @@ const SignUp = () => {
 					</select>
 				</section>
 				<section className='input'>
-					<label htmlFor='matNo'>Matriculation Number</label>
+					<label htmlFor='matNo'>Clinic ID Number</label>
 					<input
 						id='matNo'
 						name='matNo'
@@ -113,6 +112,7 @@ const SignUp = () => {
 					</select>
 				</section>
 				<section>
+					<label htmlFor="report">Report :</label>
 					<textarea
 						name='report'
 						id='report'
@@ -122,8 +122,8 @@ const SignUp = () => {
 						onChange={handleAccept}></textarea>
 				</section>
 				<div>
+						<button className='btn' type='submit'>Submit</button>
 					<NavLink to='/stdfile'>
-						<button className='btn'>Submit</button>
 					</NavLink>
 				</div>
 			</form>

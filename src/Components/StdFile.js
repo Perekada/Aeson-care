@@ -1,11 +1,18 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useGlobal } from '../Contex';
+import { useNavigate } from 'react-router-dom';
 
 const StdFile = () => {
 	const {values} = useGlobal()
 	console.log(values);
 	const {firstName, lastName, matNo, condition, report } = values
+	const navigate = useNavigate()
+	useEffect(()=>{
+		setTimeout(()=>{
+			navigate('/')
+		}, 20000)
+	},[])
 
 	return (
 		<div className='form'>
@@ -24,7 +31,7 @@ const StdFile = () => {
 					<p style={{textTransform: 'capitalize'}}>{condition}</p>
 				</span>
 				<span className='details'>
-					<h4 style={{ fontWeight: 'bold' }}>Emergency Report</h4>
+					<h4 style={{ fontWeight: 'bold' }}> Location And Report</h4>
 					<p>
 						{report}
 					</p>

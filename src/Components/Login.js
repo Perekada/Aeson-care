@@ -1,17 +1,47 @@
 import React from 'react';
-import StdFile from './StdFile';
+import StdFile from './StdFile'
+import { useNavigate } from 'react-router-dom';
+import supabase from './client';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useGlobal } from '../Contex';
+
 
 const Login = (props) => {
+	const [clinicID, setClinicID] = useState('')
+	const navigate = useNavigate();
+	const { values, setValues, loggedIn, setLoggedIn } = useGlobal();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
-
-		return<StdFile/>
+		let {data, error} = await supabase
+		.from('student-data')
+		.select()
+		.eq('clinicID',clinicID)
+		
+		if(error) {
+			alert(error)
+			navigate('/signup')
+		}
+		if (data){
+			setLoggedIn(true)
+			setValues(...data)
+		}
+		window.localStorage.setItem('student', JSON.stringify(...data));
+		window.localStorage.setItem('loggedIn', true)
+		return navigate('/')
 	}
+	useEffect(()=>{
+
+	},[])
 
 	return (
 		<form
-			className='login' onSubmit={handleSubmit}>
+			className='login'
+			onSubmit={handleSubmit}>
+			<div>
+				<h3>Sign In</h3>
+			</div>
 			<section>
 				<input
 					type='text'
@@ -23,17 +53,18 @@ const Login = (props) => {
 			<section>
 				<input
 					type='text'
-					name='MatNo'
-					id='MatNo'
-					placeholder='Matriculation No'
+					name='email'
+					id='email'
+					placeholder='Email'
 				/>
 			</section>
 			<section>
 				<input
-					type='password'
-					name='password'
-					id='password'
-					placeholder='Password'
+					type='text'
+					name='clinicID'
+					id='clinicID'
+					placeholder='Clinic ID'
+					onChange={(e) => setClinicID(e.target.value)}
 				/>
 			</section>
 			<button

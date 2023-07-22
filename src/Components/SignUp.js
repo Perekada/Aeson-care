@@ -1,33 +1,16 @@
 import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser'
+import emailjs from '@emailjs/browser';
+import  supabase  from './client';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGlobal } from '../Contex';
 
 const SignUp = () => {
 	const form = useRef();
-
-	const sendEmail = () => {
-
-		emailjs
-			.sendForm(
-				'service_ldu69s5',
-				'template_6zbm9j5',
-				form.current,
-				'CIUw0NAi1htBswg9y'
-			)
-			.then(
-				(result) => {
-					console.log(result.text);
-				},
-				(error) => {
-					console.log(error.text);
-				}
-			);
-	};
+	
 	const { values, setValues } = useGlobal();
-	const [students, setStudents] = useState([]);
-	const navigate = useNavigate()
+	const [formError, setFormError] = useState(null);
+	const navigate = useNavigate();
 	const handleAccept = (e) => {
 		e.preventDefault();
 		const name = e.target.id;
@@ -35,17 +18,33 @@ const SignUp = () => {
 		setValues({ ...values, [name]: value });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-			setStudents([...students, values]);
-			sendEmail();
+		if(!values.firstName || !values.lastName || !values.email || !values.condition || !values.clinicID){
+			setFormError('Please fill in all the feilds correctly')
+			return
+		}
+		console.log(values);
+		const { data, error } = await supabase
+			.from('student-data')
+			.insert([{...values}])
+			.select();
+			if (error){
+				console.log(error);
+				setFormError('fill the form properly')
+			}
+			if (data){
+				console.log(data);
+				setFormError(null)
+			}
+		// sendEmail();
 	};
-	
-	const Nav = () =>{
-		setTimeout(()=>{
-		navigate('/stdfile')
-		},5000)
-	}
+
+	const Nav = () => {
+		setTimeout(() => {
+			navigate('/login');
+		}, 5000);
+	};
 
 	return (
 		<div className='form'>
@@ -53,7 +52,9 @@ const SignUp = () => {
 				ref={form}
 				className='form-control'
 				onSubmit={handleSubmit}>
-				<h3>Report Emergency</h3>
+				<div>
+					<h3>Sign Up</h3>
+				</div>
 				<section className='input'>
 					<label htmlFor='firstName'>First Name:</label>
 					<input
@@ -77,28 +78,35 @@ const SignUp = () => {
 					/>
 				</section>
 				<section className='input'>
-					<label htmlFor='gender'>Gender</label>
-					<select
-						name='gender'
-						id='gender'
+					<label htmlFor='email'>Email</label>
+					<input
+						type='email'
+						name='email'
+						id='email'
+						required
 						onChange={handleAccept}
-						required>
-						<option value=''>Gender</option>
-						<option value='male'>Male</option>
-						<option value='female'>Female</option>
-						<option value='other'>Other</option>
-					</select>
+					/>
 				</section>
 				<section className='input'>
-					<label htmlFor='matNo'>Clinic ID Number</label>
+					<label htmlFor='clinicID'>Clinic ID Number</label>
 					<input
-						id='matNo'
-						name='matNo'
+						id='clinicID'
+						name='clinicID'
 						type='text'
 						required
 						onChange={handleAccept}
 					/>
 				</section>
+				{/* <section className='input'>
+					<label htmlFor='password'>Password</label>
+					<input
+						id='password'
+						name='password'
+						type='password'
+						required
+						onChange={handleAccept}
+					/>
+				</section> */}
 				<section className='input'>
 					<label htmlFor='condition'>What conditions do you have :</label>
 					<select
@@ -114,18 +122,12 @@ const SignUp = () => {
 						<option value='ulcer'>Ulcer</option>
 					</select>
 				</section>
-				<section>
-					<label htmlFor="report">Report :</label>
-					<textarea
-						name='report'
-						id='report'
-						cols='30'
-						rows='10'
-						placeholder=''
-						onChange={handleAccept}></textarea>
-				</section>
 				<div>
-						<button className='btn' type='submit' onClick={Nav}>Submit</button>
+					<button
+						className='btn'
+						type='submit'>
+						Submit
+					</button>
 				</div>
 			</form>
 		</div>

@@ -51,19 +51,19 @@ const StdFile = () => {
 					<h4>Email:</h4>
 					<input
 						defaultValue={email}
-						readOnly></input>
+						></input>
 				</span>
 				<span className='details'>
 					<h4>Clinic No:</h4>
 					<input
 						defaultValue={clinicID}
-						readOnly></input>
+						></input>
 				</span>
 				<span className='details'>
 					<h4>Medical condition</h4>
 					<input
 						defaultValue={condition}
-						readOnly></input>
+						></input>
 				</span>
 			</div>
 		</form>

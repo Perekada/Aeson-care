@@ -19,7 +19,7 @@ function App() {
 						alt=''
 					/>
 				</a>
-				<button onClick={e => {window.localStorage.clear('student')}}>Clear</button>
+				{/* <button onClick={e => {window.localStorage.clear('student')}}>Clear</button> */}
 				<Routes>
 					<Route
 						exact

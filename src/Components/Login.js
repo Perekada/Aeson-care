@@ -1,5 +1,4 @@
 import React from 'react';
-import StdFile from './StdFile'
 import { useNavigate } from 'react-router-dom';
 import supabase from './client';
 import { useState } from 'react';
@@ -10,7 +9,7 @@ import { useGlobal } from '../Contex';
 const Login = (props) => {
 	const [clinicID, setClinicID] = useState('')
 	const navigate = useNavigate();
-	const { values, setValues, loggedIn, setLoggedIn } = useGlobal();
+	const {  setValues, setLoggedIn } = useGlobal();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()

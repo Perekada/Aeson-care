@@ -5,7 +5,7 @@ import { useGlobal } from '../Contex';
 import { useNavigate } from 'react-router-dom';
 
 const StdFile = () => {
-	const {values, setValues} = useGlobal()
+	const {values} = useGlobal()
 	const navigate = useNavigate()
 	const {firstName, lastName, clinicID, condition, email} = values
 	const form = useRef();
@@ -34,7 +34,7 @@ const StdFile = () => {
 		setTimeout(()=>{
 			navigate('/')
 		}, 20000)
-	}, [])
+	}, [navigate])
 	console.log(values);
 
 	return (

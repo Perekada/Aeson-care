@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import  supabase  from './client';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -37,15 +36,16 @@ const SignUp = () => {
 				console.log(data);
 				setFormError(null)
 			}
-		// sendEmail();
-	};
-
-	const Nav = () => {
+		
+			
+			const Nav = () => {
 		setTimeout(() => {
 			navigate('/login');
 		}, 5000);
 	};
-
+	Nav()
+};
+	
 	return (
 		<div className='form'>
 			<form
@@ -53,6 +53,7 @@ const SignUp = () => {
 				className='form-control'
 				onSubmit={handleSubmit}>
 				<div>
+					{formError}
 					<h3>Sign Up</h3>
 				</div>
 				<section className='input'>

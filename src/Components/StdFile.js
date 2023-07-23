@@ -9,12 +9,20 @@ const StdFile = () => {
 	const navigate = useNavigate()
 	const {firstName, lastName, clinicID, condition, email} = values
 	const form = useRef();
+	const btn = useRef()
+	var templateParams = {
+		firstName: firstName,
+		lastName: lastName,
+		clinicID: clinicID,
+		condition: condition,
+		email: email
+	}
 	const sendEmail = () => {
 		emailjs
-			.sendForm(
+			.send(
 				'service_ldu69s5',
 				'template_6zbm9j5',
-				form.current,
+				templateParams,
 				'CIUw0NAi1htBswg9y'
 			)
 			.then(
@@ -26,15 +34,17 @@ const StdFile = () => {
 				}
 			);
 	};
+	const handleClick = (e) => {
+		e.preventDefault()
+		sendEmail()
+		console.log('clicked');
+		setTimeout(() => {
+			navigate('/');
+		}, 20000);
+	}
 	useEffect(()=>{
-		setTimeout(()=>{
-			sendEmail()
-		}, 5000)
-
-		setTimeout(()=>{
-			navigate('/')
-		}, 20000)
-	}, [navigate])
+		btn.current.click()
+	}, [])
 	console.log(values);
 
 	return (
@@ -43,28 +53,29 @@ const StdFile = () => {
 			ref={form}>
 			<h3>Your Emergency has been reported</h3>
 			<div>
-				<span className='details'>
+				<section className='input'>
 					<h4>Name:</h4>
 					<input defaultValue={`${firstName} ${lastName}`}></input>
-				</span>
-				<span className='details'>
+				</section>
+				<section className='input'>
 					<h4>Email:</h4>
 					<input
 						defaultValue={email}
 						></input>
-				</span>
-				<span className='details'>
+				</section>
+				<section className='input'>
 					<h4>Clinic No:</h4>
 					<input
 						defaultValue={clinicID}
 						></input>
-				</span>
-				<span className='details'>
+				</section>
+				<section className='input'>
 					<h4>Medical condition</h4>
 					<input
 						defaultValue={condition}
 						></input>
-				</span>
+				</section>
+				<button style={{display: 'none'}} ref={btn} onClick={handleClick} id='btn'></button>
 			</div>
 		</form>
 	);

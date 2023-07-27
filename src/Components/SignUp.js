@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import  supabase  from './client';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useGlobal } from '../Contex';
 
 const SignUp = () => {
@@ -122,6 +122,14 @@ const SignUp = () => {
 					</button>
 				</div>
 			</form>
+			<div>
+				<p>Already have an account?</p>
+					<NavLink to='/login'>
+				<button className='btn'>
+					Sign In
+				</button>
+					</NavLink>
+			</div>
 		</div>
 	);
 };

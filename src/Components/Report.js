@@ -1,61 +1,66 @@
 import React, { useRef } from 'react';
-import  supabase  from './client';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { useNavigate } from 'react-router-dom';
-import { useGlobal } from '../Contex';
 
-const SignUp = () => {
-	const form = useRef();
-	
-	const { values, setValues } = useGlobal();
-	const [formError, setFormError] = useState(null);
-	const navigate = useNavigate();
-	const handleAccept = (e) => {
-		e.preventDefault();
-		const name = e.target.id;
-		const value = e.target.value;
-		setValues({ ...values, [name]: value });
-	};
+const Report = () => {
+    const form = useRef()
+    const navigate = useNavigate()
+    const [formError, setFormError] = useState()
+    const [values, setValues] = useState({
+			firstName: '',
+			lastName: '',
+			email: '',
+			clinicID: '',
+			condition: '',
+		});
+     const handleAccept = (e) => {
+			e.preventDefault();
+			const name = e.target.id;
+			const value = e.target.value;
+			setValues({ ...values, [name]: value });
+		};
+        const sendForm = ()=>{
+					emailjs
+						.sendForm(
+									'service_ldu69s5',
+									'template_6zbm9j5',
+									form.current,
+									'CIUw0NAi1htBswg9y'
+								)
+								.then(
+									(result) => {
+										console.log(result.text);
+									},
+									(error) => {
+										console.log(error.text);
+									}
+								);
+        }
 
-	const handleSubmit = async (e) => {
+        const handleSubmit = async (e) => {
 		e.preventDefault();
 		if(!values.firstName || !values.lastName || !values.email || !values.condition || !values.clinicID){
 			setFormError('Please fill in all the feilds correctly')
 			return
 		}
-		console.log(values);
-		const { data, error } = await supabase
-			.from('student-data')
-			.insert([{...values}])
-			.select();
-			if (error){
-				console.log(error);
-				setFormError('fill the form properly')
-			}
-			if (data){
-				console.log(data);
-				setFormError(null)
-			}
-		
-			
-			const Nav = () => {
-		setTimeout(() => {
-			navigate('/login');
-		}, 5000);
-	};
-	Nav()
-};
-	
-	return (
+        sendForm()
+        setTimeout(() => {
+					navigate('/');
+				}, 5000);
+    }
+  return (
 		<div className='form'>
 			<form
 				ref={form}
 				className='form-control'
 				onSubmit={handleSubmit}>
 				<div>
-					{formError}
-					<h3>Sign Up</h3>
+					<h3>
+                        Report emergency for someone
+                    </h3>
 				</div>
+                {formError}
 				<section className='input'>
 					<label htmlFor='firstName'>First Name:</label>
 					<input
@@ -124,6 +129,6 @@ const SignUp = () => {
 			</form>
 		</div>
 	);
-};
+}
 
-export default SignUp;
+export default Report

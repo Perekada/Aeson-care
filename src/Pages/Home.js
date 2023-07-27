@@ -10,31 +10,11 @@ const Home = () => {
 	
 
 	useEffect (()=>{
-
-		// const fetchStudents = async () => {
-		// 	const {data, error} = await supabase
-		// 	.from('student-data')
-		// 	.select()
-
-		// 	if (error){setError('Could not fetch')
-		// 	setStudents(null)
-		// 	console.log(error)
-		// }
-		// if (data){
-		// 	setStudents(data)
-		// 	setError(null)
-		// }
-		// }
-		// fetchStudents()
-		// const student = window.localStorage.getItem('student')
-		// setValues(student)
 		if (loggedIn === false){
 			navigate('/signup')
 		}
 	}, [loggedIn, navigate])
 	console.log(values);
-	// console.log(loggedIn);
-	// emailjs.sendForm()
     return (
 			<div className='Home'>
 				<div className='container'>

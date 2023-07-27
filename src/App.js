@@ -1,26 +1,22 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import logo from './logo.png'
 import Home from './Pages/Home'
 import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import StdFile from './Components/StdFile';
-
+import Navbar from './Components/Navbar';
+import SendEmail from './Components/sendEmail';
+import Report from './Components/Report';
 
 
 function App() {
   return (
 		<div className='App'>
 			<Router>
-				<a href='/'>
-					<img
-						src={logo}
-						className='logo'
-						alt=''
-					/>
-				</a>
-				{/* <button onClick={e => {window.localStorage.clear('student')}}>Clear</button> */}
+				<Navbar />
 				<Routes>
+
+				{/* <button onClick={e => {window.localStorage.clear('student')}}>Clear</button> */}
 					<Route
 						exact
 						path='/'
@@ -40,6 +36,16 @@ function App() {
 						exact
 						path='/stdfile'
 						element={<StdFile />}
+					/>
+					<Route
+						exact
+						path='/sendemail'
+						element={<SendEmail />}
+					/>
+					<Route
+						exact
+						path='/report'
+						element={<Report />}
 					/>
 				</Routes>
 			</Router>

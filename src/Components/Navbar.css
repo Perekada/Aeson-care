@@ -1,0 +1,74 @@
+.nav-center{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  padding: 1rem;
+  height: fit-content;
+}
+.nav-header img{
+    align-self: center;
+}
+.toggle{
+  display: grid;
+  padding: 0.5rem;
+  height: fit-content;
+  margin-top: 10px;
+}
+
+.links{
+  margin-top: 30px;
+  display: none;
+}
+
+.visible{
+  display:contents;
+}
+
+.links li {
+    text-decoration: none;
+    /* margin-bottom: 15px; */
+    padding: 0.5rem;
+}
+
+.links li a{
+  color:#ccd0d8;
+  font-family:url('../Cormorant/static/Cormorant-BoldItalic.ttf');
+  font-size: 20px;
+}
+@media screen and (min-width: 400px) {
+
+  .links li a{
+    font-size: 20px;
+  }
+  li {
+    line-height: 1.5;
+  }
+}
+
+.nav-toggle{
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  color: white;
+  cursor:pointer;
+}
+.nav-toggle {
+  font-size: 1.5rem;
+ justify-self: end;
+  background: transparent;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.nav-toggle img{
+    width: 60px;
+    height: 60px;
+}
+
+

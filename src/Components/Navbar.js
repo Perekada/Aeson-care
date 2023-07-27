@@ -37,10 +37,6 @@ const Navbar = () => {
 					<button
 						className='nav-toggle'
 						onClick={handleClick}>
-						{/* <img
-							src={sos}
-							alt=''
-						/> */}
 						<FaBars/>
 					</button>
 					<ul className={style}>
@@ -48,7 +44,7 @@ const Navbar = () => {
 							<NavLink
 								to='/report'
 								onClick={() => setShow(false)}>
-								Report for someone
+								Report an Emergency
 							</NavLink>
 						</li>
 						<li>

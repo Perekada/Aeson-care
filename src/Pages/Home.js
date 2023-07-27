@@ -25,11 +25,15 @@ const Home = () => {
 							care response team at the tap of the button
 						</h3>
 					</section>
+					<section>
+						<h3>Experiencing an Emergency ? <br />
+						 Tap the button</h3>
 					<NavLink to='/stdfile'>
 						<button className='sos'>
 						<img src={sos} alt="SOS" />
 						</button>
 					</NavLink>
+					</section>
 				</div>
 			</div>
 		);

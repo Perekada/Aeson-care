@@ -8,11 +8,8 @@ const Report = () => {
     const navigate = useNavigate()
     const [formError, setFormError] = useState()
     const [values, setValues] = useState({
-			firstName: '',
-			lastName: '',
-			email: '',
 			clinicID: '',
-			condition: '',
+			report: '',
 		});
      const handleAccept = (e) => {
 			e.preventDefault();
@@ -23,24 +20,24 @@ const Report = () => {
         const sendForm = ()=>{
 					emailjs
 						.sendForm(
-									'service_ldu69s5',
-									'template_6zbm9j5',
-									form.current,
-									'CIUw0NAi1htBswg9y'
-								)
-								.then(
-									(result) => {
-										console.log(result.text);
-									},
-									(error) => {
-										console.log(error.text);
-									}
-								);
+							'service_ldu69s5',
+							'template_gnmwjys',
+							form.current,
+							'CIUw0NAi1htBswg9y'
+						)
+						.then(
+							(result) => {
+								console.log(result.text);
+							},
+							(error) => {
+								console.log(error.text);
+							}
+						);
         }
 
         const handleSubmit = async (e) => {
 		e.preventDefault();
-		if(!values.firstName || !values.lastName || !values.email || !values.condition || !values.clinicID){
+		if( !values.clinicID || !values.report){
 			setFormError('Please fill in all the feilds correctly')
 			return
 		}
@@ -56,43 +53,9 @@ const Report = () => {
 				className='form-control'
 				onSubmit={handleSubmit}>
 				<div>
-					<h3>
-                        Report emergency for someone
-                    </h3>
+					<h3>Report emergency for someone</h3>
 				</div>
-                {formError}
-				<section className='input'>
-					<label htmlFor='firstName'>First Name:</label>
-					<input
-						id='firstName'
-						name='firstName'
-						type='text'
-						placeholder='First Name'
-						required
-						onChange={handleAccept}
-					/>
-				</section>
-				<section className='input'>
-					<label htmlFor='lastName'>Last Name:</label>
-					<input
-						id='lastName'
-						name='lastName'
-						type='text'
-						placeholder='Last Name'
-						required
-						onChange={handleAccept}
-					/>
-				</section>
-				<section className='input'>
-					<label htmlFor='email'>Email</label>
-					<input
-						type='email'
-						name='email'
-						id='email'
-						required
-						onChange={handleAccept}
-					/>
-				</section>
+				{formError}
 				<section className='input'>
 					<label htmlFor='clinicID'>Clinic ID Number</label>
 					<input
@@ -104,20 +67,14 @@ const Report = () => {
 					/>
 				</section>
 				<section className='input'>
-					<label htmlFor='condition'>What conditions do you have :</label>
-					<select
-						name='condition'
-						id='condition'
+					<label htmlFor='report'>Emergency Description:</label>
+					<textarea
+						name='report'
+						id='report'
+						cols='30'
+						rows='10'
 						onChange={handleAccept}
-						required>
-						<option value='sickle-cell'>Sickle Cell</option>
-						<option value='asthma'>Asthma</option>
-						<option value='seizure'>Seizures</option>
-						<option value='low-blood-pressure'>Low Blood Pressure</option>
-						<option value='hypoglycaemia'>Hypoglycaemia</option>
-						<option value='ulcer'>Ulcer</option>
-						<option value='none'>None of the Above</option>
-					</select>
+						required></textarea>
 				</section>
 				<div>
 					<button
